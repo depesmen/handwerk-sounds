@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Handwerk Sounds — Music Label & Artisanal Speakers</title>
+  <meta name="description" content="Handwerk Sounds is a French music label and artisanal speaker manufacturer. Underground electronic music, handmade horn speakers, made in France." />
+  <meta property="og:title" content="Handwerk Sounds" />
+  <meta property="og:description" content="French music label & handmade horn speakers. Underground electronic, made in France." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/vinyl-closeup.png" />
+  <link rel="icon" href="assets/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:ital,wght@0,400;0,600;0,700;0,800;1,700;1,800&family=Press+Start+2P&display=swap" rel="stylesheet" />
+  <!--
+    Pour la font Arcade Gamer :
+    1. Télécharge depuis dafont.com/arcade-gamer.font
+    2. Place arcade-gamer.woff2 dans le dossier fonts/
+    3. Décommente le @font-face ci-dessous et remplace 'Press Start 2P' par 'Arcade Gamer'
+  -->
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green:  #1eff1b;
+      --black:  #0a0a0a;
+      --white:  #f2f2f2;
+      --gray:   #888;
+      --font-title: 'Bai Jamjuree', sans-serif;
+      --font-sub:   'Press Start 2P', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { background: var(--black); color: var(--white); font-family: var(--font-title); overflow-x: hidden; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 2.5rem;
+      transition: background .3s;
+    }
+    nav.scrolled { background: rgba(10,10,10,.92); backdrop-filter: blur(12px); }
+    .nav-logo { display: flex; align-items: center; gap: .8rem; text-decoration: none; }
+    .nav-logo img { height: 52px; width: auto; filter: invert(1); }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-size: .72rem; letter-spacing: .18em; color: var(--gray); text-decoration: none; transition: color .2s; }
+    .nav-links a:hover { color: var(--green); }
+
+    /* Hamburger */
+    .hamburger {
+      display: none; flex-direction: column; justify-content: center; gap: 5px;
+      background: none; border: none; cursor: pointer; padding: .4rem;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 2px; background: var(--white);
+      transition: transform .25s, opacity .25s;
+    }
+    nav.open .hamburger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    nav.open .hamburger span:nth-child(2) { opacity: 0; }
+    nav.open .hamburger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ── HERO ── */
+    #hero {
+      position: relative; height: 100vh; overflow: hidden;
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; object-position: center;
+      filter: brightness(.55);
+      transform: scale(1.05);
+    }
+    .hero-side {
+      position: absolute; font-size: .72rem; letter-spacing: .28em;
+      text-transform: uppercase; color: var(--white); top: 50%; transform: translateY(-50%);
+      writing-mode: horizontal-tb;
+    }
+    .hero-side.left  { left: 3rem; }
+    .hero-side.right { right: 3rem; }
+    .hero-content { position: relative; z-index: 2; text-align: center; padding: 0 1rem; }
+    .hero-title {
+      font-family: var(--font-title); font-weight: 800; font-style: normal;
+      font-size: clamp(5rem, 17vw, 15rem);
+      line-height: .88; color: var(--green);
+    }
+    .hero-sub {
+      font-family: var(--font-sub); font-size: clamp(.5rem, 1.1vw, .75rem);
+      letter-spacing: .22em; color: var(--white); margin-top: 2rem;
+      text-transform: uppercase;
+    }
+
+    /* ── LABEL ── */
+    #label { background: var(--black); padding: 8rem 3rem 6rem; }
+    .label-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+    .label-left h2 {
+      font-family: var(--font-title); font-weight: 800; font-style: normal;
+      font-size: clamp(4rem, 9vw, 8rem); line-height: .88; color: var(--green);
+    }
+    .label-subtitle { font-family: var(--font-sub); font-size: .6rem; letter-spacing: .12em; color: var(--white); margin-top: 1.2rem; }
+    .label-body { margin-top: 1.8rem; font-size: .95rem; line-height: 1.85; color: rgba(242,242,242,.7); max-width: 44ch; }
+    .eq-bars { display: flex; align-items: flex-end; gap: 4px; margin-top: 2.2rem; height: 48px; }
+    .eq-bar { width: 10px; background: var(--green); border-radius: 2px 2px 0 0; animation: eq-bounce var(--dur) ease-in-out infinite alternate; }
+    @keyframes eq-bounce { from { transform: scaleY(.15); } to { transform: scaleY(1); } }
+
+    .label-right { position: relative; }
+    .label-photo { width: 100%; display: block; object-fit: cover; }
+
+    /* ── RELEASES ── */
+    #releases { background: var(--black); padding: 5rem 3rem 7rem; border-top: 1px solid #1c1c1c; }
+    .releases-inner { max-width: 1100px; margin: 0 auto; }
+    .ep-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
+    .ep-card { display: flex; flex-direction: column; }
+    .ep-vinyl {
+      width: 100%; aspect-ratio: 1; object-fit: cover; display: block;
+      background: #000;
+      transition: opacity .4s;
+    }
+    .ep-card:hover .ep-vinyl { opacity: .85; }
+    .ep-ref { font-family: var(--font-sub); font-size: .58rem; letter-spacing: .1em; color: var(--green); margin-top: 1.2rem; }
+    .ep-desc { font-size: .85rem; line-height: 1.75; color: rgba(242,242,242,.65); margin-top: .6rem; }
+    .ep-btn {
+      display: inline-block; margin-top: 1.2rem; padding: .8rem 2.2rem;
+      background: var(--green); color: var(--black);
+      font-family: var(--font-title); font-weight: 700; font-size: .78rem;
+      letter-spacing: .15em; text-transform: uppercase; text-decoration: none;
+      border: none; cursor: pointer; align-self: flex-start;
+      transition: background .2s;
+    }
+    .ep-btn:hover { background: #fff; }
+
+    /* ── ARTISANAL ── */
+    #craft {
+      position: relative; overflow: hidden; min-height: 65vh;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .craft-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.4); }
+    .craft-title {
+      position: relative; z-index: 2;
+      font-family: var(--font-title); font-weight: 800; font-style: normal;
+      font-size: clamp(3.5rem, 10vw, 9rem); line-height: .9;
+      color: var(--green); text-align: center; padding: 2rem;
+    }
+
+    /* ── SPEAKERS ── */
+    #speakers { background: var(--black); padding: 8rem 3rem 6rem; }
+    .speakers-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+    .speakers-left h2 {
+      font-family: var(--font-title); font-weight: 800; font-style: normal;
+      font-size: clamp(4rem, 9vw, 8rem); line-height: .88; color: var(--green);
+    }
+    .speakers-subtitle { font-family: var(--font-sub); font-size: .6rem; letter-spacing: .12em; color: var(--white); margin-top: 1.2rem; }
+    .speakers-body { margin-top: 1.8rem; font-size: .95rem; line-height: 1.85; color: rgba(242,242,242,.7); }
+    .speakers-body strong { color: var(--white); }
+    .cta-talk {
+      display: inline-block; margin-top: 2rem; padding: .9rem 2rem;
+      background: transparent; border: 1px solid var(--green); color: var(--green);
+      font-family: var(--font-title); font-weight: 700; font-size: .75rem;
+      letter-spacing: .14em; text-transform: uppercase; text-decoration: none; cursor: pointer;
+      transition: background .2s, color .2s;
+    }
+    .cta-talk:hover { background: var(--green); color: var(--black); }
+
+    /* Configurator */
+    .speakers-right { position: sticky; top: 6rem; }
+    .configurator { margin-top: 2.4rem; }
+    .config-label {
+      font-family: var(--font-title); font-size: .7rem; letter-spacing: .2em;
+      text-transform: uppercase; color: var(--gray); margin-bottom: .8rem; margin-top: 1.6rem;
+    }
+    .config-label::before { content: '// '; color: var(--green); }
+    .config-swatches { display: flex; gap: .7rem; flex-wrap: wrap; }
+    .swatch-btn {
+      width: 30px; height: 30px; border-radius: 50%; border: 2px solid transparent;
+      cursor: pointer; transition: border-color .2s, transform .2s;
+    }
+    .swatch-btn.active, .swatch-btn:hover { border-color: var(--white); transform: scale(1.18); }
+    .text-btns { display: flex; gap: .6rem; flex-wrap: wrap; }
+    .text-btn {
+      padding: .5rem 1.2rem; border: 1px solid #333; color: var(--gray);
+      font-family: var(--font-title); font-size: .72rem; font-weight: 600;
+      letter-spacing: .12em; text-transform: uppercase; cursor: pointer;
+      background: transparent; transition: border-color .2s, color .2s;
+    }
+    .text-btn.active, .text-btn:hover { border-color: var(--green); color: var(--green); }
+
+    /* ── FOLLOW ── */
+    #follow {
+      position: relative; overflow: hidden; min-height: 60vh;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .follow-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.3); }
+    .follow-content { position: relative; z-index: 2; text-align: center; padding: 2rem; }
+    .follow-title {
+      font-family: var(--font-title); font-weight: 800; font-style: normal;
+      font-size: clamp(4rem, 13vw, 12rem); line-height: .88; color: var(--green);
+    }
+    .follow-links { display: flex; justify-content: center; gap: 1.5rem; margin-top: 3rem; flex-wrap: wrap; }
+    .follow-link {
+      display: flex; align-items: center; gap: .6rem;
+      font-size: .75rem; letter-spacing: .16em; text-transform: uppercase;
+      color: var(--white); text-decoration: none;
+      padding: .9rem 2rem; border: 1px solid rgba(255,255,255,.2);
+      transition: border-color .25s, color .25s;
+    }
+    .follow-link:hover { border-color: var(--green); color: var(--green); }
+    .follow-link svg { width: 16px; height: 16px; fill: currentColor; flex-shrink: 0; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--black); border-top: 1px solid #1c1c1c;
+      padding: 2rem 2.5rem;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-left { display: flex; align-items: center; gap: 1.2rem; }
+    .footer-logo { height: 44px; width: auto; filter: invert(1); }
+    .footer-ig svg { width: 20px; height: 20px; fill: rgba(242,242,242,.4); transition: fill .2s; }
+    .footer-ig:hover svg { fill: var(--white); }
+    footer p { font-size: .72rem; color: var(--gray); letter-spacing: .08em; }
+    .footer-email { font-size: .72rem; color: var(--gray); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 860px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links {
+        display: none; flex-direction: column; gap: 1.5rem;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(10,10,10,.97); padding: 2rem 1.5rem;
+        border-bottom: 1px solid #1c1c1c;
+      }
+      nav.open .nav-links { display: flex; }
+      .hamburger { display: flex; }
+      #label, #speakers { padding: 5rem 1.5rem; }
+      .label-inner, .speakers-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .speakers-right { position: static; }
+      .ep-grid { grid-template-columns: 1fr 1fr; }
+      #releases { padding: 4rem 1.5rem; }
+      .hero-side { display: none; }
+      footer { flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 520px) {
+      .ep-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav id="nav">
+  <a href="#hero" class="nav-logo">
+    <img src="assets/logo.png" alt="Handwerk Sounds" width="52" height="52" />
+  </a>
+  <ul class="nav-links">
+    <li><a href="#label">Label</a></li>
+    <li><a href="#releases">Releases</a></li>
+    <li><a href="#speakers">Speakers</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ── HERO ── -->
+<section id="hero">
+  <img class="hero-bg" src="assets/vinyl-closeup.png" alt="" />
+  <span class="hero-side left">Music</span>
+  <span class="hero-side right">Label</span>
+  <div class="hero-content">
+    <h1 class="hero-title">Handwerk<br/>Sounds</h1>
+    <p class="hero-sub">Electronic Euphoria</p>
+  </div>
+</section>
+
+<!-- ── LABEL ── -->
+<section id="label">
+  <div class="label-inner">
+    <div class="label-left">
+      <h2>Music<br/>Label</h2>
+      <p class="label-subtitle">Fresh &amp; Hot Drops</p>
+      <p class="label-body">Handwerk Sounds is where French craftsmanship meets club culture. Dropping fresh, high-energy electronic cuts with zero compromise, the label serves up grooves built to ignite the floor and keep it locked till sunrise. Each release is handcrafted, forward-thinking, and tuned for those who live for the drop — from deep, hypnotic journeys to peak-time bangers. This is pure underground energy, made in France.</p>
+      <div class="eq-bars" id="eq-bars"></div>
+    </div>
+    <div class="label-right">
+      <img class="label-photo" src="assets/dj.png" alt="DJ" loading="lazy" />
+    </div>
+  </div>
+</section>
+
+<!-- ── RELEASES ── -->
+<section id="releases">
+  <div class="releases-inner">
+    <div class="ep-grid">
+
+      <div class="ep-card">
+        <img class="ep-vinyl" src="assets/vinyl-1.png" alt="HWS 001" loading="lazy" />
+        <span class="ep-ref">HWS 001</span>
+        <p class="ep-desc"><em>Around the Corner</em> EP, featuring Casual Plaza, Kiss The Future, Dissaet, Amiee and their four tracks crafted right in the neighborhood.</p>
+        <a class="ep-btn" href="#" target="_blank">Shop</a>
+      </div>
+
+      <div class="ep-card">
+        <img class="ep-vinyl" src="assets/vinyl-2.png" alt="HWS 002" loading="lazy" />
+        <span class="ep-ref">HWS 002</span>
+        <p class="ep-desc"><em>I Left The City</em> EP, the debut solo record from Kiss The Future. The EP moves through introspection and rhythmic tension, balancing depth with drive.</p>
+        <a class="ep-btn" href="#" target="_blank">Shop</a>
+      </div>
+
+      <div class="ep-card">
+        <img class="ep-vinyl" src="assets/vinyl-3.png" alt="HWS 003" loading="lazy" />
+        <span class="ep-ref">HWS 003</span>
+        <p class="ep-desc"><em>Night Protocol</em> EP — a peak-time statement from the label's core collective. Raw, late-night energy across four relentless tracks built for the closing hour.</p>
+        <a class="ep-btn" href="#" target="_blank">Shop</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── ARTISANAL KNOW-HOW ── -->
+<section id="craft">
+  <img class="craft-bg" src="assets/workshop.png" alt="Workshop" loading="lazy" />
+  <h2 class="craft-title">Artisanal<br/>know-how</h2>
+</section>
+
+<!-- ── SPEAKERS ── -->
+<section id="speakers">
+  <div class="speakers-inner">
+    <div class="speakers-left">
+      <h2>Speakers</h2>
+      <p class="speakers-subtitle">Handmade &amp; Customizable</p>
+      <p class="speakers-body">
+        We craft handmade, custom speakers in our workshops in France. Each speaker is built to order, combining high-end sound performance with a strong design identity. <strong>The enclosure, horn and stands are fully customizable</strong> — materials, finishes and proportions adapted to your space and listening needs.<br/><br/>
+        No mass production. Only bespoke speakers, made to last.
+      </p>
+      <a class="cta-talk" id="cta-talk" href="mailto:handwerkc@gmail.com?subject=Speaker inquiry">Let's talk about your needs</a>
+    </div>
+    <div class="speakers-right">
+      <!--
+        SVG geometry:
+        Horn  cy=108, rx=ry=100 → top=8px (safe), bottom=208
+        Gorge 5% de ø200 = 10px → overlap → cabinet top = 198
+        Cabinet y=198, height=310 → bottom=508
+        ViewBox "0 0 280 560"
+      -->
+      <svg id="speaker-svg" viewBox="0 0 280 560" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:320px;display:block;margin:0 auto;">
+
+        <!-- ── CABINET (allongé) ── -->
+        <rect id="sv-cab" x="30" y="198" width="220" height="310" rx="4" fill="#5c3d20"/>
+        <g opacity=".12" stroke="#fff" stroke-width=".6">
+          <line x1="30" y1="260" x2="250" y2="260"/>
+          <line x1="30" y1="322" x2="250" y2="322"/>
+          <line x1="30" y1="384" x2="250" y2="384"/>
+          <line x1="30" y1="446" x2="250" y2="446"/>
+        </g>
+
+        <!-- ── WOOFER (fixed, black) ── -->
+        <ellipse cx="140" cy="348" rx="74" ry="74" fill="#111"/>
+        <ellipse cx="140" cy="348" rx="59" ry="59" fill="#1a1a1a"/>
+        <ellipse cx="140" cy="348" rx="39" ry="39" fill="#0d0d0d"/>
+        <ellipse cx="140" cy="348" rx="14" ry="14" fill="#2a2a2a"/>
+        <ellipse cx="140" cy="348" rx="5"  ry="5"  fill="#444"/>
+        <ellipse cx="140" cy="348" rx="74" ry="74" fill="none" stroke="#2a2a2a" stroke-width="2"/>
+
+        <!-- Bass port -->
+        <rect x="112" y="466" width="56" height="10" rx="3" fill="rgba(0,0,0,.55)"/>
+
+        <!-- HWS badge -->
+        <text x="140" y="498" text-anchor="middle" font-family="'Bai Jamjuree',sans-serif"
+          font-weight="700" font-size="8" fill="#1eff1b" letter-spacing="4">HWS</text>
+
+        <!-- ── GORGE — même couleur que pavillon, bouche le joint cabinet/horn ── -->
+        <rect id="sv-horn-neck" x="117" y="188" width="46" height="20" fill="#e8e0d4"/>
+
+        <!-- ── PAVILLON (horn, modifiable) ── -->
+        <!-- cy=108, rx=ry=100 → top=8 ✓, bottom=208, gorge=(208-198)=10px=5% de ø200 -->
+        <ellipse id="sv-horn-outer" cx="140" cy="108" rx="100" ry="100" fill="#e8e0d4"/>
+        <ellipse id="sv-horn-mid"   cx="140" cy="108" rx="83"  ry="83"  fill="#d4cbbe"/>
+        <ellipse id="sv-horn-in"    cx="140" cy="108" rx="61"  ry="61"  fill="#bfb8ad"/>
+        <!-- compression driver central (fixe) -->
+        <ellipse cx="140" cy="108" rx="20" ry="20" fill="#1a1a1a"/>
+        <ellipse cx="140" cy="108" rx="8"  ry="8"  fill="#333"/>
+        <ellipse cx="140" cy="108" rx="3"  ry="3"  fill="#555"/>
+        <!-- ring details -->
+        <ellipse cx="140" cy="108" rx="61" ry="61" fill="none" stroke="rgba(0,0,0,.12)" stroke-width="1.5"/>
+        <ellipse cx="140" cy="108" rx="83" ry="83" fill="none" stroke="rgba(0,0,0,.08)" stroke-width="1"/>
+
+        <!-- ── FEET ── -->
+        <rect id="sv-foot-l" x="55"  y="508" width="18" height="34" rx="2" fill="#8a8a8a"/>
+        <rect id="sv-foot-r" x="207" y="508" width="18" height="34" rx="2" fill="#8a8a8a"/>
+      </svg>
+
+      <div class="configurator">
+
+        <p class="config-label">Pavillon (Horn)</p>
+        <div class="config-swatches" id="swatches-horn">
+          <button class="swatch-btn active" data-val="ivory"  title="Ivory"  style="background:#e8e0d4;"></button>
+          <button class="swatch-btn"        data-val="black"  title="Black"  style="background:#111;"></button>
+          <button class="swatch-btn"        data-val="copper" title="Copper" style="background:linear-gradient(135deg,#b87333,#7a4a1e);"></button>
+        </div>
+
+        <p class="config-label">Revêtement Enceinte</p>
+        <div class="config-swatches" id="swatches-cab">
+          <button class="swatch-btn active" data-val="walnut" title="Walnut"    style="background:linear-gradient(135deg,#5c3d20,#2a1508);"></button>
+          <button class="swatch-btn"        data-val="oak"    title="Oak"       style="background:linear-gradient(135deg,#c8a96e,#8b5e3c);"></button>
+          <button class="swatch-btn"        data-val="black"  title="Black felt" style="background:#1a1a1a;"></button>
+          <button class="swatch-btn"        data-val="gray"   title="Gray felt"  style="background:#555;"></button>
+        </div>
+
+        <p class="config-label">Type de Pied</p>
+        <div class="text-btns" id="btns-feet">
+          <button class="text-btn active" data-val="metal">Metal</button>
+          <button class="text-btn"        data-val="wood">Wood</button>
+          <button class="text-btn"        data-val="without">Without</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOLLOW ── -->
+<section id="follow">
+  <img class="follow-bg" src="assets/dj.png" alt="" loading="lazy" />
+  <div class="follow-content">
+    <h2 class="follow-title">Follow<br/>the label</h2>
+    <div class="follow-links">
+      <a class="follow-link" href="https://instagram.com" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.791-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        Instagram
+      </a>
+      <a class="follow-link" href="https://soundcloud.com" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M1.175 12.225c-.041 0-.082.035-.082.082l-.414 2.884.414 2.828c0 .047.041.082.082.082.04 0 .082-.035.082-.082l.468-2.828-.468-2.884c0-.047-.041-.082-.082-.082zm1.558-.742c-.047 0-.088.035-.088.082l-.468 3.626.468 3.545c0 .047.04.082.088.082.047 0 .088-.035.088-.082l.528-3.545-.528-3.626c0-.047-.04-.082-.088-.082zm1.586-.225c-.053 0-.099.046-.099.099l-.522 3.851.522 3.544c0 .053.046.099.099.099.053 0 .099-.046.099-.099l.592-3.544-.592-3.851c0-.053-.046-.099-.099-.099zm1.598.164c-.059 0-.111.052-.111.111l-.575 3.687.575 3.43c0 .059.052.111.111.111.059 0 .111-.052.111-.111l.652-3.43-.652-3.687c0-.059-.052-.111-.111-.111zm1.617.346c-.064 0-.123.059-.123.123l-.628 3.341.628 3.193c0 .064.059.123.123.123.064 0 .123-.059.123-.123l.714-3.193-.714-3.341c0-.064-.059-.123-.123-.123zm1.632.808c-.07 0-.135.065-.135.135l-.681 2.533.681 2.944c0 .07.065.135.135.135.07 0 .135-.065.135-.135l.772-2.944-.772-2.533c0-.07-.065-.135-.135-.135zm1.645 1.09c-.076 0-.146.07-.146.146l-.733 1.443.733 2.696c0 .076.07.146.146.146.076 0 .146-.07.146-.146l.832-2.696-.832-1.443c0-.076-.07-.146-.146-.146zm1.656 1.45c-.082 0-.158.076-.158.158l-.785.353.785 2.45c0 .082.076.158.158.158.082 0 .158-.076.158-.158l.891-2.45-.891-.353c0-.082-.076-.158-.158-.158zm1.664 1.543c-.088 0-.17.082-.17.17l-.837.17.837 2.204c0 .088.082.17.17.17.088 0 .17-.082.17-.17l.949-2.204-.949-.17c0-.088-.082-.17-.17-.17zm5.01-6.948c-.228 0-.452.035-.664.1-.137-3.026-2.619-5.45-5.675-5.45-1.007 0-1.952.275-2.757.756-.293.181-.37.37-.376.543v10.721c.006.187.152.34.341.352h9.131c.885 0 1.601-.716 1.601-1.601v-3.82c0-1.769-1.433-3.201-3.201-3.201z"/></svg>
+        SoundCloud
+      </a>
+      <a class="follow-link" href="https://discogs.com" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zm0 4.5c4.142 0 7.5 3.358 7.5 7.5s-3.358 7.5-7.5 7.5S4.5 16.142 4.5 12 7.858 4.5 12 4.5zm0 3c-2.485 0-4.5 2.015-4.5 4.5s2.015 4.5 4.5 4.5 4.5-2.015 4.5-4.5-2.015-4.5-4.5-4.5zm0 2.25c1.243 0 2.25 1.007 2.25 2.25S13.243 14.25 12 14.25 9.75 13.243 9.75 12 10.757 9.75 12 9.75z"/></svg>
+        Discogs
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-left">
+    <img class="footer-logo" src="assets/logo.png" alt="Handwerk Sounds" width="44" height="44" />
+    <a class="footer-ig" href="https://instagram.com" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.791-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+    </a>
+  </div>
+  <p>© 2025 — All Rights Reserved</p>
+  <span class="footer-email">handwerkc@gmail.com</span>
+</footer>
+
+<script>
+  // Nav scroll
+  window.addEventListener('scroll', () => {
+    document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Hamburger toggle
+  document.getElementById('hamburger').addEventListener('click', function() {
+    const nav = document.getElementById('nav');
+    const open = nav.classList.toggle('open');
+    this.setAttribute('aria-expanded', open);
+  });
+
+  // Close menu on link click
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', () => {
+      document.getElementById('nav').classList.remove('open');
+      document.getElementById('hamburger').setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // Equalizer bars
+  const eqWrap = document.getElementById('eq-bars');
+  [60,85,45,100,70,55,90,40,75,65,95,50,80,35,100].forEach(() => {
+    const bar = document.createElement('div');
+    bar.className = 'eq-bar';
+    bar.style.height = (30 + Math.random() * 70) + '%';
+    bar.style.setProperty('--dur', (.35 + Math.random() * .65) + 's');
+    bar.style.animationDelay = (Math.random() * .5) + 's';
+    eqWrap.appendChild(bar);
+  });
+
+  // Configurator
+  const hornColors = { ivory:'#e8e0d4', black:'#1a1a1a', copper:'#b87333' };
+  const cabColors  = { walnut:'#5c3d20', oak:'#c8a96e', black:'#1a1a1a', gray:'#555' };
+  const feetColors = { metal:'#8a8a8a', wood:'#8b6c3e' };
+
+  const config = { horn: 'ivory', cabinet: 'walnut', feet: 'metal' };
+
+  function updateCtaLink() {
+    const body = `Hello,\n\nI would like to discuss a custom speaker order with the following configuration:\n- Horn: ${config.horn}\n- Cabinet: ${config.cabinet}\n- Feet: ${config.feet}\n\nPlease get back to me at your earliest convenience.`;
+    document.getElementById('cta-talk').href =
+      `mailto:handwerkc@gmail.com?subject=Speaker inquiry — ${config.horn} horn / ${config.cabinet} cabinet / ${config.feet} feet&body=${encodeURIComponent(body)}`;
+  }
+  updateCtaLink();
+
+  function shadeColor(hex, pct) {
+    const n = parseInt(hex.replace('#',''), 16);
+    const r = Math.min(255, Math.max(0, (n>>16) + pct*2.55|0));
+    const g = Math.min(255, Math.max(0, ((n>>8)&0xff) + pct*2.55|0));
+    const b = Math.min(255, Math.max(0, (n&0xff) + pct*2.55|0));
+    return `rgb(${r},${g},${b})`;
+  }
+
+  document.getElementById('swatches-horn').querySelectorAll('.swatch-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.getElementById('swatches-horn').querySelectorAll('.swatch-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      config.horn = btn.dataset.val;
+      const base = hornColors[btn.dataset.val];
+      document.getElementById('sv-horn-neck').setAttribute('fill', base);
+      document.getElementById('sv-horn-outer').setAttribute('fill', base);
+      document.getElementById('sv-horn-mid').setAttribute('fill', shadeColor(base, -10));
+      document.getElementById('sv-horn-in').setAttribute('fill', shadeColor(base, -22));
+      updateCtaLink();
+    });
+  });
+
+  document.getElementById('swatches-cab').querySelectorAll('.swatch-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.getElementById('swatches-cab').querySelectorAll('.swatch-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      config.cabinet = btn.dataset.val;
+      document.getElementById('sv-cab').setAttribute('fill', cabColors[btn.dataset.val]);
+      updateCtaLink();
+    });
+  });
+
+  document.getElementById('btns-feet').querySelectorAll('.text-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.getElementById('btns-feet').querySelectorAll('.text-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      config.feet = btn.dataset.val;
+      const show = btn.dataset.val !== 'without';
+      const col  = btn.dataset.val === 'wood' ? feetColors.wood : feetColors.metal;
+      ['sv-foot-l','sv-foot-r'].forEach(id => {
+        document.getElementById(id).setAttribute('fill', show ? col : 'transparent');
+      });
+      updateCtaLink();
+    });
+  });
+</script>
+</body>
+</html>
